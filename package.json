@@ -15,5 +15,8 @@
   },
   "devDependencies": {},
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "scripts": {
+    "start": "node server.js"
+  }
 }
