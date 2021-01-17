@@ -1,6 +1,3 @@
-
-
-
 async function imageClassificationWithImage() {
     console.log('Loading mobilenet..');
   
@@ -17,7 +14,7 @@ async function imageClassificationWithImage() {
   async function imageClassificationWithWebcam() {
     console.log('Loading mobilenet..');
   
-    // Load the model.
+    // Load the model from tensorflow.js
     net = await mobilenet.load();
     console.log('Successfully loaded model');
   
@@ -73,12 +70,13 @@ async function imageClassificationWithImage() {
     const saveClassifier = async (classifierModel) => {
       let datasets = await classifierModel.getClassifierDataset();
       let datasetObject = {};
-      Object.keys(datasets).forEach(async (key) => {
-        let data = await datasets[key].dataSync();
+      Object.keys(datasets).forEach((key) => {
+        let data = datasets[key].dataSync();
         datasetObject[key] = Array.from(data);
       });
       let jsonModel = JSON.stringify(datasetObject);
-  
+
+      console.log('jsonModel', jsonModel)
       let downloader = document.createElement('a');
       downloader.download = "model.json";
       downloader.href = 'data:text/text;charset=utf-8,' + encodeURIComponent(jsonModel);
@@ -108,7 +106,8 @@ async function imageClassificationWithImage() {
     };
   
     const downloadModel = async (classifierModel) => {
-      saveClassifier(classifierModel);
+      console.log('In downloadModel...')
+      saveClassifier(knnClassifierModel);
     };
     const putImageToPage = (event) => {
       var input = event.target;

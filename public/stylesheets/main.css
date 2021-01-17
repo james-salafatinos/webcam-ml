@@ -1,0 +1,189 @@
+.jumbotron {
+    background: #532F8C;
+    background-image: url(backgroundpic.png);
+    color: white;
+    padding-bottom: 5px; }
+    .jumbotron .btn-primary {
+      background: #845ac7;
+      border-color: #845ac7; }
+      .jumbotron .btn-primary:hover {
+        background: #7646c1; }
+    .jumbotron .btn-secondary {
+      background: #2cdd93;
+      border-color: #2cdd93;
+      color: #0a1d14 }
+      .jumbotron .btn-secondary:hover {
+        background: #22ad73; }
+    .jumbotron p {
+      color: #d9ccee;
+      max-width: 75%;
+      margin: 1em auto 2em; }
+    .navbar + .jumbotron {
+      margin-top: -20px; }
+    .jumbotron .lang-logo {
+      display: block;
+      background: #B01302;
+      box-shadow: 
+      12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+      -8px -8px 12px 0 rgba(255, 255, 255, 0.3);
+      border-radius: 20%;
+      overflow: hidden;
+      width: 250px;
+      height: 250px;
+      margin: auto;
+      border: 0px solid white; }
+      .jumbotron .lang-logo img {
+        max-width: 100%; }
+  
+  
+        
+  .btn{
+    box-shadow: 
+    12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+    -8px -8px 12px 0 rgba(255, 255, 255, 0.3);
+    
+  }
+  
+  
+  
+  body {
+    background-image: url(../backgroundpic.png);
+  }
+  
+  
+  
+  .element {
+    align-items: center;
+    background-color: #ffffff;
+  
+    box-shadow: 
+      12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+      -8px -8px 12px 0 rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    display: inline-flex;
+    height: 500px;
+    justify-content: center;
+    margin-right: 4rem;
+    margin-left: 4rem;
+    width: 900px;
+  }
+  
+  .element-small {
+    align-items: center;
+    vertical-align:middle;
+    border-radius: 50px;
+    display: inline-flex;
+    height: 20px;
+    margin-top:15px;
+    justify-content: center;
+    margin-right: 4rem;
+    width: 900px;
+  }
+  
+  .event-text {
+    fill:'black';
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: 400;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  body
+  {
+    background-color:#f2f2f2;
+    font-family: 'RobotoDraft', 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  *
+  {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  
+  h5
+  {
+    margin:0px;
+    font-size:1.4em;
+    font-weight:700;
+  }
+  
+  p
+  {
+    font-size:12px;
+  }
+  
+  .center
+  {
+    height:40vh;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* End Non-Essential  */
+  
+  .property-card
+  {
+    height:18em;
+    width:14em;
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:inline-flex;
+    -webkit-box-orient:vertical;
+    -webkit-box-direction:normal;
+    -ms-flex-direction:column;
+    flex-direction:column;
+    position:relative;
+    -webkit-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -o-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    border-radius:16px;
+    overflow:hidden;
+    -webkit-box-shadow:  15px 15px 27px #e1e1e3, -15px -15px 27px #ffffff;
+    box-shadow:  15px 15px 27px #e1e1e3, -15px -15px 27px #ffffff;
+  }
+  /* ^-- The margin bottom is necessary for the drop shadow otherwise it gets clipped in certain cases. */
+  
+  /* Top Half of card, image. */
+  
+  .property-image
+  {
+    height:6em;
+    width:14em;
+    padding:1em 2em;
+    position:Absolute;
+    top:0px;
+    -webkit-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -o-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    background-image:url('https://cdn.photographylife.com/wp-content/uploads/2017/01/What-is-landscape-photography.jpg');
+    background-size:cover;
+    background-repeat:no-repeat;
+  }
+  
+  /* Bottom Card Section */
+  
+  .property-description
+  {
+    background-color: #FAFAFC;
+    height:12em;
+    width:14em;
+    position:absolute;
+    bottom:0em;
+    -webkit-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -o-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    padding: 0.5em 1em;
+    text-align:center;
+  }
+  

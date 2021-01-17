@@ -5,8 +5,9 @@ const port = 3000
 
 //Express config for enabling templating engine to serve html
 app.set('view engine', 'ejs');
-//Express config to enable the model serving static javascript file
+//Express config to enable the model serving of static javascript file
 app.use(express.static(__dirname+"/views"));
+app.use(express.static(__dirname+"/public/"));
 
 app.get('/', (req, res) => {
   res.render('index')
