@@ -4,11 +4,12 @@ Real-time image classification using your webcam with tensorflow.js
 Getting Started
 
 
-
+ToDos:
+1. Add loading gif for when webcam is initializing and model is downloading
 
 Notes:
 
-.idea:
+Ideas:
 1. Enable free text classes to easily label the examples I'm capturing
 2. If I could connect the webcam to other video capture devices (i.e. my phone)
 3. To easily "sign in" with a code to update an online stored model
@@ -17,3 +18,14 @@ Notes:
 
 
 Challenges:
+
+
+Deploy to Google App Engine
+1. Create an Google App Engine app from the GCP console dashboard
+2. Enter cloud shell from online GCP dashboard
+3. clone github repository
+4. Run "export PORT=3000 && npm install"
+   1. This will set the port and install the dependencies to set up the env
+5. Run "npm start"
+   1. This will start the server and host the application
+6. Now app can be web previewed (may have to change the default viewing port)
