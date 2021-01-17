@@ -1,0 +1,30 @@
+
+<html>
+    <head>
+        <!-- http://127.0.0.1:8887/ -->
+        <!-- Load the latest version of TensorFlow.js -->
+        <script src="https://unpkg.com/@tensorflow/tfjs"></script>
+        <script src="https://unpkg.com/@tensorflow-models/mobilenet"></script>
+        <script src="https://unpkg.com/@tensorflow-models/knn-classifier"></script>
+        <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="public/stylesheets/main.css" />
+        <meta http-equiv="content-language" content="en" />
+    </head>
+    <body>
+    <div id="console"></div>
+    <!-- Add an image that we will use to test -->
+    <!--<img id="img" crossorigin src="https://i.imgur.com/Fi4j15h.jpg" width="227" height="227"/>-->
+    <video autoplay playsinline muted id="webcam" width="224" height="224"></video>
+    <button id="class-a">Add A</button>
+    <button id="class-b">Add B</button>
+    <button id="class-c">Add C</button>
+    <button id="save_button">Save</button>
+    <!--<button id="load_button">Load</button>-->
+    <input id="load_button" type='file' accept='.json'>
+    <img id='output'>
+    <!-- Load index.js after the content of the page -->
+    <script src="app.js"></script>
+    </body>
+    </html>
