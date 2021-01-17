@@ -29,3 +29,22 @@ Deploy to Google App Engine
 5. Run "npm start"
    1. This will start the server and host the application
 6. Now app can be web previewed (may have to change the default viewing port)
+
+
+Resources
+1. Testing Framework
+   1. Mocha
+2. App Deployment
+   1. Google App Engine
+3. Editor
+   1. VS Code
+4. Server
+   1. Express
+5. Backend
+   1. NodeJS
+6. Front End
+   1. None
+7. CI/CD
+   1. Github Actions
+8. Database
+   1. Google Firebase

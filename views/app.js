@@ -65,6 +65,10 @@ async function imageClassificationWithImage() {
       document.getElementById('class-a').addEventListener('click', () => addDatasetClass(0));
       document.getElementById('class-b').addEventListener('click', () => addDatasetClass(1));
       document.getElementById('class-c').addEventListener('click', () => addDatasetClass(2));
+     
+      document.getElementById('class-label').addEventListener('submit', () => console.log('hi'));
+
+
     };
   
     const saveClassifier = async (classifierModel) => {
@@ -146,7 +150,7 @@ async function imageClassificationWithImage() {
           // Get the most likely class and confidences from the classifier module.
           const result = await knnClassifierModel.predictClass(activation);
   
-          const classes = ['A', 'B', 'C'];
+          const classes = ['A', 'B', 'C', 'D'];
           document.getElementById('console').innerText = `
           prediction: ${classes[result.label]}\n
           probability: ${result.confidences[result.label]}
