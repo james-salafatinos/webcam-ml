@@ -66,6 +66,11 @@ async function imageClassificationWithImage() {
       document.getElementById('class-b').addEventListener('click', () => addDatasetClass(1));
       document.getElementById('class-c').addEventListener('click', () => addDatasetClass(2));
      
+      // document.getElementsByTagName("input")[0].addEventListener('change', doThing);
+      // /* function */
+      // function doThing(){
+      //   alert('Horray! Someone wrote "' + this.value + '"!');
+      // }
       document.getElementById('class-label').addEventListener('submit', () => console.log('hi'));
 
 
@@ -126,6 +131,7 @@ async function imageClassificationWithImage() {
     };
   
     const addDatasetClass = async (classId) => {
+      console.log('add class', classId)
       // Capture an image from the web camera.
       const img = await webcamInput.capture();
   
