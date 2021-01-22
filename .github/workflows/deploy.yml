@@ -1,5 +1,15 @@
-steps:
-- id: deploy
-  uses: google-github-actions/deploy-appengine@main
-  with:
-    credentials: ${{ secrets.gcp_credentials }}
+name: Deploy to Google App Engine
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    name: GAE Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - id: deploy
+      uses: google-github-actions/deploy-appengine@main
+      with:
+        credentials: ${{ secrets.gcp_credentials }}
+
