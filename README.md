@@ -59,3 +59,11 @@ Google Cloud SDK commands:
    1. Sets the SDK pointing to a project
 3. gcloud app browse
    1. Launches the web preview
+4. gcloud iam service-accounts keys create secret.json \
+       --iam-account PROJECT_ID@appspot.gserviceaccount.com
+  1. This allows you to create a credentials json to enable github actions (CI/CD) to deploy
+
+
+Resources:
+1. Google App Engine CI/CD Deployment with Github Actions
+   1. https://tomekkolasa.com/how-to-deploy-node-js-app-to-google-app-engine-using-github-actions
