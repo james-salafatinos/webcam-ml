@@ -1,8 +1,8 @@
 {
-  "name": "test1",
+  "name": "webcam-ml",
   "version": "1.0.0",
   "description": "",
-  "main": "poseDetector.js",
+  "main": "app.js",
   "dependencies": {
     "@google-cloud/compute": "^2.4.2",
     "@tensorflow-models/knn-classifier": "^1.2.2",
