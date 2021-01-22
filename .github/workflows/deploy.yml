@@ -1,4 +1,5 @@
-id: deploy
+steps:
+- id: deploy
   uses: google-github-actions/deploy-appengine@main
   with:
     credentials: ${{ secrets.gcp_credentials }}
