@@ -48,3 +48,14 @@ Resources
    1. Github Actions
 8. Database
    1. Google Firebase
+
+
+
+
+Google Cloud SDK commands:
+1. gcloud auth login
+   1. Allows you to login through web and swap credentials
+2. gcloud config set project "..."
+   1. Sets the SDK pointing to a project
+3. gcloud app browse
+   1. Launches the web preview
