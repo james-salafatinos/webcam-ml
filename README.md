@@ -18,6 +18,7 @@ Ideas:
 
 
 Challenges:
+1. CI/CD
 
 
 Deploy to Google App Engine
