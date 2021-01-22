@@ -65,7 +65,5 @@ Google Cloud SDK commands:
 
 
 Resources:
-1. Google App Engine CI/CD Deployment with Github Actions
-   1. https://tomekkolasa.com/how-to-deploy-node-js-app-to-google-app-engine-using-github-actions
-2. Need updated google cloud github action deployment script
-   1. https://github.com/google-github-actions/deploy-appengine
+1. Google Cloud Build guide to connect with github repo:
+2. 
