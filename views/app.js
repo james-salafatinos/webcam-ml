@@ -58,20 +58,22 @@ async function imageClassificationWithImage() {
     const knnClassifierModel = await createKNNClassifier();
     const webcamInput = await createWebcamInput();
   
+   
+
     const initializeElements = () => {
+
+      function addCustomClass(event) {
+        let class_label = document.getElementById("input-label").value;
+        addDatasetClass(class_label)
+      }
+
       document.getElementById('load_button').addEventListener('change', (event) => uploadModel(knnClassifierModel,event));
       document.getElementById('save_button').addEventListener('click', async () => downloadModel(knnClassifierModel));
   
       document.getElementById('class-a').addEventListener('click', () => addDatasetClass(0));
       document.getElementById('class-b').addEventListener('click', () => addDatasetClass(1));
       document.getElementById('class-c').addEventListener('click', () => addDatasetClass(2));
-     
-      // document.getElementsByTagName("input")[0].addEventListener('change', doThing);
-      // /* function */
-      // function doThing(){
-      //   alert('Horray! Someone wrote "' + this.value + '"!');
-      // }
-      document.getElementById('class-label').addEventListener('submit', () => console.log('hi'));
+      document.getElementById('class-label').addEventListener('submit', addCustomClass);
 
 
     };
@@ -132,6 +134,8 @@ async function imageClassificationWithImage() {
   
     const addDatasetClass = async (classId) => {
       console.log('add class', classId)
+      classes.push(classId);
+      console.log(classes)
       // Capture an image from the web camera.
       const img = await webcamInput.capture();
   
@@ -145,6 +149,11 @@ async function imageClassificationWithImage() {
       // Dispose the tensor to release the memory.
       img.dispose();
     };
+
+
+    //define global class function
+    var classes = ['A', 'B', 'C', 'D'];
+
     const imageClassificationWithTransferLearningOnWebcam = async () => {
       console.log("Machine Learning on the web is ready");
       while (true) {
@@ -156,7 +165,11 @@ async function imageClassificationWithImage() {
           // Get the most likely class and confidences from the classifier module.
           const result = await knnClassifierModel.predictClass(activation);
   
-          const classes = ['A', 'B', 'C', 'D'];
+          //Original Classes tucked within function
+          //const classes = ['A', 'B', 'C', 'D'];
+
+          //Printing results to screen
+          console.log("Result.Label: ", result.label)
           document.getElementById('console').innerText = `
           prediction: ${classes[result.label]}\n
           probability: ${result.confidences[result.label]}

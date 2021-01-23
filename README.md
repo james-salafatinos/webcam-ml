@@ -11,6 +11,7 @@ Notes:
 
 Ideas:
 1. Enable free text classes to easily label the examples I'm capturing
+   1. User types and then can repeatedly capture different angles with the same "Capture" button
 2. If I could connect the webcam to other video capture devices (i.e. my phone)
 3. To easily "sign in" with a code to update an online stored model
    1. So that any time I go to the site, I can enter my code and the app will download the cloud storage model associated with that code. Then you may use the app to update it, and then save your progress. When saved the app will update the model weights in the cloud associated with that code and close. No authentication or sign in required.
