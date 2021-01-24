@@ -48,8 +48,8 @@ Resources
    1. None
 7. CI/CD
    1. Github Actions
-8. Database
-   1. Google Firebase
+8. Database 
+   1. MongoDB
 
 
 
