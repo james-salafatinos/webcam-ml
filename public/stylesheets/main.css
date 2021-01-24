@@ -47,7 +47,7 @@
   
   
   body {
-    background-image: url(../backgroundpic.png);
+    background-image: url(backgroundpic.png);
   }
   
   
@@ -73,6 +73,7 @@
     vertical-align:middle;
     border-radius: 50px;
     display: inline-flex;
+    color: black;
     height: 20px;
     margin-top:15px;
     justify-content: center;

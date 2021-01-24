@@ -15,9 +15,10 @@
     <div id="console"></div>
     <div class="jumbotron text-center">
         <div class="container">
-            <!-- Add an image that we will use to test -->
-            <!--<img id="img" crossorigin src="https://i.imgur.com/Fi4j15h.jpg" width="227" height="227"/>-->
-            <video autoplay playsinline muted id="webcam" width="224" height="224"></video>
+            <video autoplay playsinline muted id="webcam" width="336" height="336"></video>
+            <br>
+            <br>
+            <br>
             <div></div>
             <button class="btn btn-lg btn-default" id="class-a">Add A</button>
             <button class="btn btn-lg btn-default" id="class-b">Add B</button>
@@ -29,7 +30,10 @@
                 <input id = "input-label" class= "element-small" type="text" name="class-label"><br>
               </form>
             <!--<button id="load_button">Load</button>-->
-            <input id="load_button" type='file' accept='.json'>
+            <div>
+                <input value = "Load Prior Knowledge" class="btn btn-lg btn-default" id="load_button" type='file' accept='.json'>
+            </div>
+            
             <img id='output'>
             <!-- Load index.js after the content of the page -->
             <script src="app.js"></script>

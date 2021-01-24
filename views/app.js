@@ -64,6 +64,7 @@ async function imageClassificationWithImage() {
 
       function addCustomClass(event) {
         let class_label = document.getElementById("input-label").value;
+        
         addDatasetClass(class_label)
       }
 
@@ -164,14 +165,11 @@ async function imageClassificationWithImage() {
           const activation = mobilenetModel.infer(img, 'conv_preds');
           // Get the most likely class and confidences from the classifier module.
           const result = await knnClassifierModel.predictClass(activation);
-  
-          //Original Classes tucked within function
-          //const classes = ['A', 'B', 'C', 'D'];
 
-          //Printing results to screen
-          console.log("Result.Label: ", result.label)
+
+         //Printing results to screen
           document.getElementById('console').innerText = `
-          prediction: ${classes[result.label]}\n
+          prediction: ${result.label}\n
           probability: ${result.confidences[result.label]}
         `;
   
