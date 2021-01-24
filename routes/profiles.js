@@ -5,8 +5,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 const Weights = require('../models/weights.model');
 const mongoose = require('mongoose');
-const dbURI = process.env.MONGODB_URI || ""
-console.log(dbURI)
+const dbURI = "mongodb+srv://james:mountaindew@cluster0.10vne.mongodb.net/webcamML?retryWrites=true&w=majority"
 mongoose.connect(dbURI, {useNewUrlParser:true, useUnifiedTopology: true})
 .then((result) => console.log('Connected to db'))
 .catch((err) => console.log(err));
