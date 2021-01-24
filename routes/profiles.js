@@ -21,8 +21,8 @@ router.get("/", function (req, res) {
 
 router.get('/add-record', (req,res)=>{
   const weight = new Weights({
-    code: '1212',
-    model_weights:'12123'
+    code: "1215552",
+    model_weights:"121523"
   });
   weight.save()
   .then((result) => {
@@ -32,6 +32,22 @@ router.get('/add-record', (req,res)=>{
     res.send(err)
   })
 });
+
+router.post('/add-record', (req,res)=>{
+    const b = req.body;
+    console.log(b)
+    // const weight = new Weights({
+    //   code: '1215552',
+    //   model_weights:'121523'
+    // });
+    // weight.save()
+    // .then((result) => {
+    //   res.send(result)
+    // })
+    // .catch((err)=>{
+    //   res.send(err)
+    // })
+  });
 
 router.get('/all-records', (req, res)=>{
   Weights.find()

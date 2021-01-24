@@ -4,6 +4,7 @@ const app = express()
 const port = 3000
 const bodyParser = require("body-parser");
 
+
 //Required for environment variables
 require('dotenv').config()
 
@@ -12,13 +13,17 @@ app.set('view engine', 'ejs');
 //Express config to enable the model serving of static javascript file
 app.use(express.static(__dirname+"/views"));
 app.use(express.static(__dirname+"/public/"));
+
 //Use body parser to enable handling post requests
 app.use(bodyParser.urlencoded({ extended: true }));
+//Necessary to utilize db api service
+app.use(bodyParser.json());
 
 
 
 
 app.get('/', (req, res) => {
+  console.log('User entry to site...')
   res.render('index')
 })
 
