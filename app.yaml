@@ -1,3 +1,1 @@
 runtime: nodejs14
-env_variables:
-  MONGODB_URI: "mongodb+srv://james:mountaindew@cluster0.10vne.mongodb.net/webcamML?retryWrites=true&w=majority"
