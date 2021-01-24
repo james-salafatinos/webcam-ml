@@ -1,25 +1,21 @@
-async function imageClassificationWithImage() {
-  console.log("Loading mobilenet..");
-
-  // Load the model.
-  net = await mobilenet.load();
-  console.log("Successfully loaded model");
-
-  // Make a prediction through the model on our image.
-  const imgEl = document.getElementById("img");
-  const result = await net.classify(imgEl);
-  console.log(result);
-}
-
 //profiles.js mongo db save
 async function saveToDatabase(model) {
-  // axios.get('http://localhost:3000/profiles/add-record')
   axios.post('http://localhost:3000/profiles/add-record',{
-        code: 'test_axios',
-        model_weights:'testtt'
+        code: "test_axios",
+        model_weights: model
   })
-  console.log(model)
+  console.log("Weights sent to DB...")
 };
+
+async function retrieveFromDatabase(model) {
+
+  const db_promise = axios.get('http://localhost:3000/profiles/single-record')
+
+  const data_promise = db_promise.then((response) => response.data)
+  return data_promise
+};
+
+
 
 async function imageClassificationWithWebcam() {
   console.log("Loading mobilenet..");
@@ -119,6 +115,14 @@ const start = async () => {
     downloader.remove();
   };
 
+  const uploadModelFromDatabase = async (classifierModel, event) =>{
+    retrieveFromDatabase()
+    .then(data => {
+        response.json({ message: 'Request received!', data })
+    })
+    .catch(err => console.log(err))
+  }
+
   const uploadModel = async (classifierModel, event) => {
     let inputModel = event.target.files;
     console.log("Uploading");
@@ -147,17 +151,6 @@ const start = async () => {
     console.log("In downloadModel...");
     saveClassifier(knnClassifierModel);
 
-  };
-  const putImageToPage = (event) => {
-    var input = event.target;
-
-    var reader = new FileReader();
-    reader.onload = function () {
-      var dataURL = reader.result;
-      var output = document.getElementById("output");
-      output.src = dataURL;
-    };
-    reader.readAsDataURL(input.files[0]);
   };
 
   const addDatasetClass = async (classId) => {

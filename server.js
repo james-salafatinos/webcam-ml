@@ -17,7 +17,7 @@ app.use(express.static(__dirname+"/public/"));
 //Use body parser to enable handling post requests
 app.use(bodyParser.urlencoded({ extended: true }));
 //Necessary to utilize db api service
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '100kb'}));
 
 
 

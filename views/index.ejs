@@ -34,6 +34,14 @@
             <div>
                 <input value = "Load Prior Knowledge" class="btn btn-lg btn-default" id="load_button" type='file' accept='.json'>
             </div>
+            <div>
+                <button class="btn btn-lg btn-default" id="load-from-db">Load from database</button>
+            </div>
+            <div>
+                <form onsubmit="return false" id="load-weights">
+                    <input id = "uuid-for-db" class= "element-small" type="text" name="uuid-for-db"><br>
+                  </form>
+            </div>
             
             <img id='output'>
             <!-- Load index.js after the content of the page -->
