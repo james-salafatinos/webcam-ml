@@ -13,35 +13,48 @@
         <meta http-equiv="content-language" content="en" />
     </head>
     <body>
-    <div id="console"></div>
-    <div class="jumbotron text-center">
+    <div class="jumbotron text-center lang-logo">
+
+        <div class="property-card"  id="console">
+ 
+        </div>
         <div class="container">
+            <br>
+            <br>
             <video autoplay playsinline muted id="webcam" width="336" height="336"></video>
             <br>
             <br>
             <br>
             <div></div>
+                
+            <div style="display: inline-flex">
+            <form onsubmit="return false" id="class-label">
+                <label style = "color: black" for="class-label">Class Label</label><br>
+                <input id = "input-label" class= "element-mini" type="text" name="class-label"><br>
+              </form>
             <button class="btn btn-lg btn-default" id="class-a">Add A</button>
             <button class="btn btn-lg btn-default" id="class-b">Add B</button>
             <button class="btn btn-lg btn-default" id="class-c">Add C</button>
             <button class="btn btn-lg btn-default" id="class-d">Add D</button>
             <button class="btn btn-lg btn-default" id="save_button">Save</button>
-            <form onsubmit="return false" id="class-label">
-                <label for="class-label">Class Label</label><br>
-                <input id = "input-label" class= "element-small" type="text" name="class-label"><br>
-              </form>
-            <!--<button id="load_button">Load</button>-->
-            <div>
-                <input value = "Load Prior Knowledge" class="btn btn-lg btn-default" id="load_button" type='file' accept='.json'>
             </div>
-            <div>
-                <button class="btn btn-lg btn-default" id="load-from-db">Load from database</button>
+            <br>
+            <br>
+            <br>
+
+              <div class="container" style="display: flex; height: 100px;">
+                <div style="width: 50%; background: rgba(186, 6, 117, 0.237);">
+                    <input value = "Load Prior Knowledge" class="btn btn-lg btn-default" id="load_button" type='file' accept='.json'>
+                </div>
+                <div style="flex-grow: 1; background: rgba(96, 208, 16, 0.427);">
+                    <form onsubmit="return false" id="load-weights">
+                        <input id = "uuid-for-db" class= "element-mini" type="text" name="uuid-for-db"><br>
+                      </form>
+                    <button class="btn btn-lg btn-default" id="load-from-db">Load from database</button>
+                </div>
             </div>
-            <div>
-                <form onsubmit="return false" id="load-weights">
-                    <input id = "uuid-for-db" class= "element-small" type="text" name="uuid-for-db"><br>
-                  </form>
-            </div>
+
+
             
             <img id='output'>
             <!-- Load index.js after the content of the page -->
