@@ -11,15 +11,18 @@ const dbURI =
 mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => console.log("Connected to db"))
-  .catch((err) => console.log(err));
+  .catch((err) => console.log('Error on connection with mongodb...', err));
 
 //##### /PROFILES #######
 
 router.get("/", function (req, res) {
   console.log(req.body);
+  res.status(200).send("Youve reached the API")
 });
 
+
 router.post("/add-record", (req, res) => {
+// DB API, takes a post JSON of the weights and saves it to database
   const user_weights = req.body;
   const weight = new Weights(user_weights);
   weight
@@ -34,12 +37,16 @@ router.post("/add-record", (req, res) => {
 
 router.put("/update-record/:uuid", (req, res) => {
     let user_weights_id = req.params.uuid;
-    let user_weights = req.params.body
-    console.log("put user_weights", user_weights)
-    Weights.findOneAndUpdate(
-        {_id: user_weights_id}, 
-        {model_weights: weights}
-    )});
+    let user_weights = req.body
+    //console.log("post/put..", user_weights_id, user_weights)
+
+    let filter = { code: user_weights_id};
+    let update = { model_weights: user_weights };
+    let doc = Weights.findOneAndUpdate(filter, {"$set" : update}, {new: true, upsert:true})
+    console.log(Weights.schema)
+    
+    //console.log("doc", doc)
+    });
 
 
 
@@ -63,3 +70,4 @@ router.get("/single-record/:uuid", (req, res) => {
 });
 
 module.exports = router;
+

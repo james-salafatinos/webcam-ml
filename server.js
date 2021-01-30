@@ -14,22 +14,31 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname+"/views"));
 app.use(express.static(__dirname+"/public/"));
 
-//Use body parser to enable handling post requests
-app.use(bodyParser.urlencoded({ extended: true }));
 //Necessary to utilize db api service
-app.use(bodyParser.json({limit: '100kb'}));
+app.use(bodyParser.json({limit: '50mb'}));
+//Use body parser to enable handling post requests
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 
 
-
+//@Route Home Page Route
 app.get('/', (req, res) => {
   console.log('User entry to site...')
   res.render('index')
 })
 
-//
+//@Route Router for DB & profiles
 let profiles = require("./routes/profiles");
 app.use("/profiles", profiles);
+
+//@Route Home Page Route
+app.get('/hello', (req, res) => {
+  res.status(200).json({msg:'hello world'})
+})
+
+
+
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

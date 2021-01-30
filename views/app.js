@@ -1,11 +1,37 @@
 //profiles.js mongo db save
-async function saveToDatabase(model) {
+async function saveToDatabase(code, model) {
   axios.post('http://localhost:3000/profiles/add-record',{
-        code: "test_axios",
+        code: code,
         model_weights: model
   })
   console.log("Weights sent to DB...")
 };
+
+//profiles.js mongo db save
+async function updateToDatabase(data) {
+  let db_uuid = data.u
+  let model = data.m
+
+  let datasets = await model.getClassifierDataset();
+  let datasetObject = {};
+  Object.keys(datasets).forEach((key) => {
+    let data = datasets[key].dataSync();
+    datasetObject[key] = Array.from(data);
+  });
+  let jsonModel = JSON.stringify(datasetObject);
+
+ 
+  console.log("Inside updateToDatabase", db_uuid)
+  console.log('In Update to Database...')
+  axios.put(`http://localhost:3000/profiles/update-record/${db_uuid}`,{
+        "code": `${db_uuid}`,
+        "model_weights": jsonModel
+  })
+  console.log("Weights updated to DB...")
+};
+
+
+
 
 async function retrieveFromDatabase(model) {
 
@@ -68,16 +94,59 @@ const start = async () => {
       let class_label = document.getElementById("input-label").value;
 
       addDatasetClass(class_label);
-    }
+    };
+
+    function takeValueAndSaveToDatabase(model, update = false) {
+
+      if (!update){
+        let db_uuid = document.getElementById("update-uuid-for-db").value;
+
+        downloadModel(db_uuid, knnClassifierModel)
+      } else{
+        updateModel(db_uuid, knnClassifierModel)
+      }
+
+      //updateToDatabase({"u": db_uuid, "m": knnClassifierModel})
+    };
+
+    async function saveModelToMongoDB(model) {
+      let db_uuid = document.getElementById("update-uuid-for-db").value;
+      
+      //Prepare Dataset for storage
+      let datasets = await model.getClassifierDataset();
+      let datasetObject = {};
+      Object.keys(datasets).forEach((key) => {
+        let data = datasets[key].dataSync();
+        datasetObject[key] = Array.from(data);
+      });
+      let jsonModel = JSON.stringify(datasetObject);
+      
+
+      axios.post('http://localhost:3000/profiles/add-record',{
+              code: db_uuid,
+              model_weights: jsonModel
+        }).then((result) => {console.log('Saved to MongoDB')})
+      console.log("Weights sent to DB...")
+    };
+
 
     document
       .getElementById("load_button")
       .addEventListener("change", (event) =>
         uploadModel(knnClassifierModel, event)
       );
+    // document
+    //   .getElementById("save_button")
+    //   .addEventListener("click", async () => downloadModel(knnClassifierModel));
+    
     document
       .getElementById("save_button")
-      .addEventListener("click", async () => downloadModel(knnClassifierModel));
+      .addEventListener("click", async () => takeValueAndSaveToDatabase(knnClassifierModel));
+
+      document
+      .getElementById("save_to_database_button")
+      .addEventListener("click", async () => saveModelToMongoDB(knnClassifierModel));
+
 
     document
       .getElementById("class-a")
@@ -93,7 +162,9 @@ const start = async () => {
       .addEventListener("submit", addCustomClass);
   };
 
-  const saveClassifier = async (classifierModel) => {
+
+
+  const saveClassifier = async (db_uuid, classifierModel) => {
     let datasets = await classifierModel.getClassifierDataset();
     let datasetObject = {};
     Object.keys(datasets).forEach((key) => {
@@ -103,7 +174,7 @@ const start = async () => {
     let jsonModel = JSON.stringify(datasetObject);
 
     //console.log("jsonModel", jsonModel);
-    saveToDatabase(jsonModel);
+    saveToDatabase(db_uuid, jsonModel);
 
 
     let downloader = document.createElement("a");
@@ -146,10 +217,17 @@ const start = async () => {
     console.log("Uploaded");
   };
 
-  const downloadModel = async (classifierModel) => {
+  const downloadModel = async (db_uuid, classifierModel) => {
     
     console.log("In downloadModel...");
-    saveClassifier(knnClassifierModel);
+    saveClassifier(db_uuid, knnClassifierModel);
+
+  };
+
+  const updateModel = async (db_uuid, classifierModel) => {
+    
+    console.log("In downloadModel...");
+    saveClassifier(db_uuid, knnClassifierModel);
 
   };
 
