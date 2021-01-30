@@ -20,6 +20,7 @@ Ideas:
 
 Challenges:
 1. CI/CD
+2. GAE always listens to port 8080, you cannot configure it differently.
 
 
 Deploy to Google App Engine
