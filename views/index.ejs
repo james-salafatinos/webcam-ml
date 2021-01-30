@@ -1,75 +1,117 @@
-
 <html>
-    <head>
-        <!-- Load the latest version of TensorFlow.js -->
-        <script src="https://unpkg.com/@tensorflow/tfjs"></script>
-        <script src="https://unpkg.com/@tensorflow-models/mobilenet"></script>
-        <script src="https://unpkg.com/@tensorflow-models/knn-classifier"></script>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="stylesheets/main.css" />
-        <meta http-equiv="content-language" content="en" />
-    </head>
-    <body>
+  <head>
+    <!-- Load the latest version of TensorFlow.js -->
+    <script src="https://unpkg.com/@tensorflow/tfjs"></script>
+    <script src="https://unpkg.com/@tensorflow-models/mobilenet"></script>
+    <script src="https://unpkg.com/@tensorflow-models/knn-classifier"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script
+      type="text/javascript"
+      src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"
+    ></script>
+    <link rel="stylesheet" type="text/css" href="stylesheets/main.css" />
+    <meta http-equiv="content-language" content="en" />
+  </head>
+  <body>
     <div class="jumbotron text-center lang-logo">
+      <div class="property-card" id="console"></div>
+      <div class="container">
+        <br />
+        <br />
+        <video
+          autoplay
+          playsinline
+          muted
+          id="webcam"
+          width="336"
+          height="336"
+        ></video>
+        <br />
+        <br />
+        <br />
+        <div></div>
 
-        <div class="property-card"  id="console">
- 
+        <div style="display: inline-flex">
+          <form onsubmit="return false" id="class-label">
+            <label style="color: black" for="class-label">Class Label</label
+            ><br />
+            <input
+              id="input-label"
+              class="element-mini"
+              type="text"
+              name="class-label"
+            /><br />
+          </form>
+          <button class="btn btn-lg btn-default" id="class-a">Add A</button>
+          <button class="btn btn-lg btn-default" id="class-b">Add B</button>
+          <button class="btn btn-lg btn-default" id="class-c">Add C</button>
+          <button class="btn btn-lg btn-default" id="class-d">Add D</button>
         </div>
-        <div class="container">
-            <br>
-            <br>
-            <video autoplay playsinline muted id="webcam" width="336" height="336"></video>
-            <br>
-            <br>
-            <br>
-            <div></div>
-                
-            <div style="display: inline-flex">
-            <form onsubmit="return false" id="class-label">
-                <label style = "color: black" for="class-label">Class Label</label><br>
-                <input id = "input-label" class= "element-mini" type="text" name="class-label"><br>
-              </form>
-            <button class="btn btn-lg btn-default" id="class-a">Add A</button>
-            <button class="btn btn-lg btn-default" id="class-b">Add B</button>
-            <button class="btn btn-lg btn-default" id="class-c">Add C</button>
-            <button class="btn btn-lg btn-default" id="class-d">Add D</button>
-            <button class="btn btn-lg btn-default" id="save_button">Save</button>
-            </div>
-            <br>
-            <br>
-            <br>
+        <br />
+        <br />
+        <br />
 
-              <div class="container" style="display: flex; height: 200px;">
-                <div style="width: 50%; background: rgba(186, 6, 117, 0.237);">
-                    <input value = "Load Prior Knowledge" class="btn btn-default" id="load_button" type='file' accept='.json'>
-                    
-                    <form onsubmit="return false" id="update-weights">
-                        <input id = "update-uuid-for-db" class= "element-mini" type="text" name="update-uuid-for-db"><br>
-                      </form>
-                      <button class="btn btn-lg btn-default" id="save_to_database_button">Save to database</button>
-                </div>
-                <div style="flex-grow: 1; background: rgba(96, 208, 16, 0.427);">
-                    <form onsubmit="return false" id="load-weights">
-                        <input id = "uuid-for-db" class= "element-mini" type="text" name="uuid-for-db"><br>
-                      </form>
-                    <button class="btn btn-lg btn-default" id="load-from-db">Load from database</button>
-                </div>
-         
-            </div>
+        <div class="container" style="display: flex; height: 250px">
+          <div style="width: 50%; background: rgba(186, 6, 117, 0.237)">
+            <h3>Saving</h3>
+            <button class="btn btn-lg btn-default" id="save_to_database_button">
+              Save Model to Database
+            </button>
+            <!-- <button class="btn btn-default" id="db-id-copy">
+              ___
+            </button> -->
+            <br>
+            <br>
+            <h5>OR</h5>
+            <br>
+            <button class="btn btn-lg btn-default" id="save_button">
+              Save Model Locally
+            </button>
 
-            <div>
-               
-            </div>
+
+          </div>
+          <div style="flex-grow: 1; background: rgba(96, 208, 16, 0.427)">
+            <h3>Loading</h3>
+            <form onsubmit="return false" id="load-weights">
+              <input
+                id="uuid-for-db"
+                class="element-mini center-block"
+                type="text"
+                name="uuid-for-db"
+              />
+
+              <button class="btn btn-default center-block" id="load-from-db">
+                Load from Database ID
+              </button>
+            </form>
+
+            <h5>OR</h5>
+            <br>
+            <input
+              value="Load Prior Knowledge"
+              class="btn btn-default center-block"
+              id="load_button"
+              type="file"
+              accept=".json"
+            />
+
             
-            <img id='output'>
-            <!-- Load index.js after the content of the page -->
-            <script src="app.js"></script>
-        </div>
-    </div>
-    </body>
-    </html>
 
-    
+          </div>
+        </div>
+
+        <div></div>
+
+        <img id="output" />
+        <!-- Load index.js after the content of the page -->
+        <script src="app.js"></script>
+      </div>
+    </div>
+  </body>
+</html>

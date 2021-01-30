@@ -202,3 +202,7 @@
     text-align:center;
   }
   
+  .center-block {
+    margin: auto;
+    display: block;
+  }
