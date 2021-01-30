@@ -38,27 +38,6 @@ async function saveToDatabase(model) {
   console.log("Weights sent to DB...");
 }
 
-//profiles.js mongo db save
-async function updateToDatabase(data) {
-  let db_uuid = data.u;
-  let model = data.m;
-
-  let datasets = await model.getClassifierDataset();
-  let datasetObject = {};
-  Object.keys(datasets).forEach((key) => {
-    let data = datasets[key].dataSync();
-    datasetObject[key] = Array.from(data);
-  });
-  let jsonModel = JSON.stringify(datasetObject);
-
-  console.log("Inside updateToDatabase", db_uuid);
-  console.log("In Update to Database...");
-  axios.put(`http://localhost:8080/profiles/update-record/${db_uuid}`, {
-    code: `${db_uuid}`,
-    model_weights: jsonModel,
-  });
-  console.log("Weights updated to DB...");
-}
 
 async function loadFromDatabase(db_uuid, classifierModel) {
   //test id: 60159f08deec565ee8da4ef2
