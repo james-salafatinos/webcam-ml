@@ -2,7 +2,7 @@ runtime: nodejs14
 handlers:
   - url: /static
       static_dir: views
-  -url: /(.*)
+  - url: /(.*)
       static_files: public/\1
       upload: public/(.*)
   - url: /.*
