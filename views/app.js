@@ -15,8 +15,9 @@ async function saveToDatabase(model) {
       model_weights: jsonModel,
     })
     .then((result) => {
+      // console.log(`axios post: Add-Record Returned`, JSON.stringify(result));
       console.log(`axios post: Add-Record Returned`);
-
+      window.location.href=`/profiles/single-record/${result.data._id}`
     });
 
   console.log("Weights sent to DB...");

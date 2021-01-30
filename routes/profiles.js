@@ -16,9 +16,10 @@ mongoose
 //##### /PROFILES #######
 
 router.get("/", function (req, res) {
-  console.log(req.body);
   res.status(200).send("Youve reached the API");
 });
+
+
 
 router.post("/add-record", (req, res) => {
   // DB API, takes a post JSON of the weights and saves it to database
@@ -29,7 +30,7 @@ router.post("/add-record", (req, res) => {
       console.log(err)
     } else{
       console.log(`Saved weights to MongoDB with _id: ${JSON.stringify(result._id)}`);
-      res.send(result)
+      res.redirect(`/profiles/single-record/${result._id}`)
     }
   })
 });
