@@ -1,3 +1,12 @@
+if (window.location == "https://webcam-ml.uc.r.appspot.com/"){
+  var base_url = "https://webcam-ml.uc.r.appspot.com"
+  console.log(base_url)
+} else{
+  var base_url =  "http://localhost:8080"
+  console.log(base_url)
+}
+
+
 //profiles.js mongo db save
 async function saveToDatabase(model) {
   //Prepare Dataset for storage
@@ -9,9 +18,11 @@ async function saveToDatabase(model) {
     datasetObject[key] = Array.from(data);
   });
   let jsonModel = JSON.stringify(datasetObject);
+  
+  
 
   axios
-    .post("http://localhost:3000/profiles/add-record", {
+    .post("http://localhost:8080/profiles/add-record", {
       model_weights: jsonModel,
     })
     .then((result) => {
@@ -42,7 +53,7 @@ async function updateToDatabase(data) {
 
   console.log("Inside updateToDatabase", db_uuid);
   console.log("In Update to Database...");
-  axios.put(`http://localhost:3000/profiles/update-record/${db_uuid}`, {
+  axios.put(`http://localhost:8080/profiles/update-record/${db_uuid}`, {
     code: `${db_uuid}`,
     model_weights: jsonModel,
   });
@@ -55,7 +66,7 @@ async function loadFromDatabase(db_uuid, classifierModel) {
     "In loadFromDatabase, fetching the axios api for a single record"
   );
   const db_promise = axios
-    .get(`http://localhost:3000/profiles/single-record/${db_uuid}`)
+    .get(`http://localhost:8080/profiles/single-record/${db_uuid}`)
     .then((result) => uploadModelFromDBJSON(JSON.stringify(result)))
     .catch((err) => console.log(err));
 

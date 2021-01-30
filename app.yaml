@@ -1,2 +1,4 @@
 runtime: nodejs
 env: flex
+includes:
+  - env_variables.yaml
