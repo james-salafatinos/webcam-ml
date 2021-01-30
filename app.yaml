@@ -1,1 +1,11 @@
 runtime: nodejs14
+handlers:
+  - url: /static
+      static_dir: views
+  -url: /(.*)
+      static_files: public/\1
+      upload: public/(.*)
+  - url: /.*
+      secure: always
+      redirect_http_response_code: 301
+      script: auto
