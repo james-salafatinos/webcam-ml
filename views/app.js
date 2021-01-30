@@ -1,7 +1,7 @@
 //profiles.js mongo db save
 async function saveToDatabase(model) {
   //Prepare Dataset for storage
-  console.log('In saveToDatabase()... passing to post /profiles/add-record')
+  console.log("In saveToDatabase()... passing to post /profiles/add-record");
   let datasets = await model.getClassifierDataset();
   let datasetObject = {};
   Object.keys(datasets).forEach((key) => {
@@ -17,7 +17,11 @@ async function saveToDatabase(model) {
     .then((result) => {
       // console.log(`axios post: Add-Record Returned`, JSON.stringify(result));
       console.log(`axios post: Add-Record Returned`);
-      window.location.href=`/profiles/single-record/${result.data._id}`
+      document.getElementById(
+        "inserted-db-id"
+      ).innerText = `${result.data._id}`;
+      //Use window.location switch instead if you want to return json via a get req of the inserted ID
+      //window.location.href=`/profiles/single-record/${result.data._id}`
     });
 
   console.log("Weights sent to DB...");
@@ -45,11 +49,33 @@ async function updateToDatabase(data) {
   console.log("Weights updated to DB...");
 }
 
-async function retrieveFromDatabase(model) {
-  const db_promise = axios.get("http://localhost:3000/profiles/single-record");
+async function loadFromDatabase(db_uuid, classifierModel) {
+  //test id: 60159f08deec565ee8da4ef2
+  console.log(
+    "In loadFromDatabase, fetching the axios api for a single record"
+  );
+  const db_promise = axios
+    .get(`http://localhost:3000/profiles/single-record/${db_uuid}`)
+    .then((result) => uploadModelFromDBJSON(JSON.stringify(result)))
+    .catch((err) => console.log(err));
 
-  const data_promise = db_promise.then((response) => response.data);
-  return data_promise;
+  const uploadModelFromDBJSON = async (db_json, event) => {
+    console.log("Uploading");
+    console.log("Received json", db_json.model_weights);
+    var db_json_parsed = JSON.parse(db_json);
+    console.log("db json parsed, ", db_json_parsed);
+    var tensorObj = JSON.parse(db_json_parsed.data.model_weights);
+    console.log("Tensor obj, ", tensorObj);
+
+    Object.keys(tensorObj).forEach((key) => {
+      tensorObj[key] = tf.tensor(tensorObj[key], [
+        tensorObj[key].length / 1024,
+        1024,
+      ]);
+    });
+    classifierModel.setClassifierDataset(tensorObj);
+    console.log("Classifier has been set up! Congrats! ");
+  };
 }
 
 async function imageClassificationWithWebcam() {
@@ -105,15 +131,13 @@ const start = async () => {
       addDatasetClass(class_label);
     }
 
-
-
-    async function getCodeNameAndTriggerDBRetrieve() {
-      
+    async function getCodeNameAndTriggerDBRetrieve(classifierModel) {
       //Get Code Name
-      let db_uuid = document.getElementById("update-uuid-for-db").value;
-      
+      let db_uuid = document.getElementById("uuid-for-db").value;
+      console.log("In getCodeNameandRetrieve... db_uuid: ", db_uuid);
+
       //Trigger DB Call
-      loadFromDatabase(db_uuid);
+      loadFromDatabase(db_uuid, classifierModel);
     }
 
     document
@@ -124,20 +148,18 @@ const start = async () => {
 
     document
       .getElementById("save_button")
-      .addEventListener("click", async () =>
-        downloadModel(knnClassifierModel)
-      );
+      .addEventListener("click", async () => downloadModel(knnClassifierModel));
 
     document
       .getElementById("save_to_database_button")
       .addEventListener("click", async () =>
-      downloadModelToDatabase(knnClassifierModel)
+        downloadModelToDatabase(knnClassifierModel)
       );
 
-      document
+    document
       .getElementById("load-from-db")
       .addEventListener("click", async () =>
-      getCodeNameAndTriggerDBRetrieve()
+        getCodeNameAndTriggerDBRetrieve(knnClassifierModel)
       );
 
     document
@@ -155,7 +177,9 @@ const start = async () => {
   };
 
   const saveClassifier = async (classifierModel) => {
-    console.log('In saveClassifier about to prep weights JSON and download locally')
+    console.log(
+      "In saveClassifier about to prep weights JSON and download locally"
+    );
     let datasets = await classifierModel.getClassifierDataset();
     let datasetObject = {};
     Object.keys(datasets).forEach((key) => {
@@ -173,14 +197,6 @@ const start = async () => {
     downloader.remove();
   };
 
-  const uploadModelFromDatabase = async (classifierModel, event) => {
-    retrieveFromDatabase()
-      .then((data) => {
-        response.json({ message: "Request received!", data });
-      })
-      .catch((err) => console.log(err));
-  };
-
   const uploadModel = async (classifierModel, event) => {
     let inputModel = event.target.files;
     console.log("Uploading");
@@ -189,6 +205,7 @@ const start = async () => {
       fr.onload = async () => {
         var dataset = fr.result;
         var tensorObj = JSON.parse(dataset);
+        console.log("Original Tensor obj", tensorObj);
 
         Object.keys(tensorObj).forEach((key) => {
           tensorObj[key] = tf.tensor(tensorObj[key], [
@@ -196,6 +213,7 @@ const start = async () => {
             1024,
           ]);
         });
+        console.log("Original Tensor obj after", tensorObj);
         classifierModel.setClassifierDataset(tensorObj);
         console.log("Classifier has been set up! Congrats! ");
       };
@@ -213,7 +231,6 @@ const start = async () => {
     console.log("In downloadModelToDatabase()... Passing to saveToDatabase()");
     saveToDatabase(knnClassifierModel);
   };
-
 
   const updateModel = async (db_uuid, classifierModel) => {
     console.log("In downloadModel...");

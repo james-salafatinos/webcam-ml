@@ -57,56 +57,48 @@
         <br />
         <br />
 
-        <div class="container" style="display: flex; height: 250px">
-          <div style="width: 50%; background: rgba(186, 6, 117, 0.237)">
-            <h3>Saving</h3>
-            <button class="btn btn-lg btn-default" id="save_to_database_button">
+
+        <div class="property-card-huge" style="display: flex; height: 300px; background-color:rgba(76, 0, 130, 0.24)" >
+                  <h3>Saving</h3>
+            <button class="btn btn-lg btn-default center-block" id="save_to_database_button">
               Save Model to Database
             </button>
-            <!-- <button class="btn btn-default" id="db-id-copy">
-              ___
-            </button> -->
-            <br>
-            <br>
+            <h4 color = "black" class id = 'inserted-db-id'></h4>
             <h5>OR</h5>
-            <br>
-            <button class="btn btn-lg btn-default" id="save_button">
+            <button class="btn btn-lg btn-default center-block" id="save_button">
               Save Model Locally
             </button>
-
-
-          </div>
-          <div style="flex-grow: 1; background: rgba(96, 208, 16, 0.427)">
-            <h3>Loading</h3>
-            <form onsubmit="return false" id="load-weights">
-              <input
-                id="uuid-for-db"
-                class="element-mini center-block"
-                type="text"
-                name="uuid-for-db"
-              />
-
-              <button class="btn btn-default center-block" id="load-from-db">
-                Load from Database ID
-              </button>
-            </form>
-
-            <h5>OR</h5>
-            <br>
-            <input
-              value="Load Prior Knowledge"
-              class="btn btn-default center-block"
-              id="load_button"
-              type="file"
-              accept=".json"
-            />
-
-            
-
           </div>
         </div>
 
-        <div></div>
+
+        <div class = "property-card-huge" style="display: flex; height: 300px; background-color: rgba(218, 165, 32, 0.26);">
+          <h3>Loading</h3>
+          <form onsubmit="return false" id="load-weights">
+            <input
+              id="uuid-for-db"
+              class="element-mini center-block"
+              type="text"
+              name="uuid-for-db"
+            />
+
+            <button class="btn btn-lg btn-default center-block" id="load-from-db">
+              Load from Database ID
+            </button>
+          </form>
+
+          <h5>OR</h5>
+          <input
+            value="Load Prior Knowledge"
+            class="btn btn-lg btn-default center-block"
+            id="load_button"
+            type="file"
+            accept=".json"
+          />
+
+        </div>
+
+
 
         <img id="output" />
         <!-- Load index.js after the content of the page -->
