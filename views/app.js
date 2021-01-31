@@ -53,9 +53,9 @@ async function loadFromDatabase(db_uuid, classifierModel) {
     console.log("Uploading");
     console.log("Received json", db_json.model_weights);
     var db_json_parsed = JSON.parse(db_json);
-    console.log("db json parsed, ", db_json_parsed);
+    
     var tensorObj = JSON.parse(db_json_parsed.data.model_weights);
-    console.log("Tensor obj, ", tensorObj);
+    
 
     Object.keys(tensorObj).forEach((key) => {
       tensorObj[key] = tf.tensor(tensorObj[key], [
@@ -82,10 +82,10 @@ async function imageClassificationWithWebcam() {
     const img = await webcam.capture();
     const result = await net.classify(img);
 
-    document.getElementById("console").innerText = `
-        prediction: ${result[0].className}\n
-        probability: ${result[0].probability}
-      `;
+    // document.getElementById("console-text-output").innerHTML = `
+    //     prediction: ${result[0].className}\n
+    //     probability: ${result[0].probability}
+    //   `;
     // Dispose the tensor to release the memory.
     img.dispose();
 
@@ -195,7 +195,7 @@ const start = async () => {
       fr.onload = async () => {
         var dataset = fr.result;
         var tensorObj = JSON.parse(dataset);
-        console.log("Original Tensor obj", tensorObj);
+        
 
         Object.keys(tensorObj).forEach((key) => {
           tensorObj[key] = tf.tensor(tensorObj[key], [
@@ -203,7 +203,7 @@ const start = async () => {
             1024,
           ]);
         });
-        console.log("Original Tensor obj after", tensorObj);
+        
         classifierModel.setClassifierDataset(tensorObj);
         console.log("Classifier has been set up! Congrats! ");
       };
@@ -228,9 +228,9 @@ const start = async () => {
   };
 
   const addDatasetClass = async (classId) => {
-    console.log("add class", classId);
+    console.log("Added class: ", classId);
     classes.push(classId);
-    console.log(classes);
+   
     // Capture an image from the web camera.
     const img = await webcamInput.capture();
 
@@ -260,8 +260,8 @@ const start = async () => {
         const result = await knnClassifierModel.predictClass(activation);
 
         //Printing results to screen
-        document.getElementById("console").innerText = `
-          prediction: ${result.label}\n
+        document.getElementById("console-text-output").innerText = `
+          prediction: ${result.label}
           probability: ${result.confidences[result.label]}
         `;
 

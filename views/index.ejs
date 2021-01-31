@@ -20,7 +20,9 @@
   </head>
   <body>
     <div class="jumbotron text-center lang-logo">
-      <div class="property-card" id="console"></div>
+      <div class="property-card" id="console">
+        <h3 id = "console-text-output">Results will be displayed here...</h3>
+      </div>
       <div class="container">
         <br />
         <br />
@@ -31,13 +33,13 @@
           id="webcam"
           width="336"
           height="336"
+          class="property-card-video"
         ></video>
-        <br />
-        <br />
-        <br />
-        <div></div>
 
-        <div style="display: inline-flex">
+        <h3 class = 'property-card-wide-header'>Learning </h3>
+        <br>
+        <br>
+        <div style="display: inline-flex" class='property-card-wide'>
           <form onsubmit="return false" id="class-label">
             <label style="color: black" for="class-label">Class Label</label
             ><br />
@@ -51,15 +53,21 @@
           <button class="btn btn-lg btn-default" id="class-a">Add A</button>
           <button class="btn btn-lg btn-default" id="class-b">Add B</button>
           <button class="btn btn-lg btn-default" id="class-c">Add C</button>
-          <button class="btn btn-lg btn-default" id="class-d">Add D</button>
         </div>
+
+      </div>
+        <!-- <div class = "property-card-wide-header center-block" ><h3 >Learning</h3>
+        </div> -->
+  
+        
+ 
         <br />
         <br />
         <br />
 
-
-        <div class="property-card-huge" style="display: flex; height: 300px; background-color:rgba(76, 0, 130, 0.24)" >
-                  <h3>Saving</h3>
+        
+        <div class="property-card-huge" style="display: flex; height: 300px; " >
+          <h3 class = 'property-card-wide-header'>Saving</h3>
             <button class="btn btn-lg btn-default center-block" id="save_to_database_button">
               Save Model to Database
             </button>
@@ -71,9 +79,9 @@
           </div>
         </div>
 
-
-        <div class = "property-card-huge" style="display: flex; height: 300px; background-color: rgba(218, 165, 32, 0.26);">
-          <h3>Loading</h3>
+        <br>
+        <div class = "property-card-huge" style="display: flex; height: 300px;">
+          <h3 class = 'property-card-wide-header text-center'>Loading</h3>
           <form onsubmit="return false" id="load-weights">
             <input
               id="uuid-for-db"
@@ -87,7 +95,7 @@
             </button>
           </form>
 
-          <h5>OR</h5>
+          <h5 style ='text-align: center'>OR</h5>
           <input
             value="Load Prior Knowledge"
             class="btn btn-lg btn-default center-block"
@@ -103,7 +111,7 @@
         <img id="output" />
         <!-- Load index.js after the content of the page -->
         <script src="app.js"></script>
-      </div>
+ 
     </div>
   </body>
 </html>
