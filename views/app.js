@@ -1,4 +1,4 @@
-if (window.location == "https://webcam-ml.uc.r.appspot.com/"){
+if (window.location.origin == "https://webcam-ml.uc.r.appspot.com"){
   var base_url = "https://webcam-ml.uc.r.appspot.com"
   console.log(base_url)
 } else{

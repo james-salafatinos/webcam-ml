@@ -2,7 +2,7 @@ const bodyParser = require("body-parser");
 const express = require("express");
 var router = express.Router();
 router.use(bodyParser.urlencoded({ extended: true }));
-router.use(bodyParser.json({ limit: "100kb" }));
+router.use(bodyParser.json({ limit: "10mb" }));
 
 const Weights = require("../models/weights.model");
 const mongoose = require("mongoose");
