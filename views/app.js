@@ -22,7 +22,7 @@ async function saveToDatabase(model) {
   
 
   axios
-    .post("http://localhost:8080/profiles/add-record", {
+    .post(`${base_url}/profiles/add-record`, {
       model_weights: jsonModel,
     })
     .then((result) => {
@@ -45,7 +45,7 @@ async function loadFromDatabase(db_uuid, classifierModel) {
     "In loadFromDatabase, fetching the axios api for a single record"
   );
   const db_promise = axios
-    .get(`http://localhost:8080/profiles/single-record/${db_uuid}`)
+    .get(`${base_url}/profiles/single-record/${db_uuid}`)
     .then((result) => uploadModelFromDBJSON(JSON.stringify(result)))
     .catch((err) => console.log(err));
 
