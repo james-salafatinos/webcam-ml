@@ -107,7 +107,8 @@ const start = async () => {
   const createWebcamInput = async () => {
     console.log("Loading Webcam Input");
     const webcamElement = await document.getElementById("webcam");
-    return await tf.data.webcam(webcamElement);
+    return await tf.data.webcam(webcamElement, {facingMode: 'environment'});
+   
   };
 
   const mobilenetModel = await createMobileNetModel();
