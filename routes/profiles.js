@@ -35,30 +35,29 @@ router.post("/add-record", (req, res) => {
   })
 });
 
-router.put("/update-record/:uuid", (req, res) => {
-  let user_weights_id = req.params.uuid;
-  let user_weights = req.body;
-  //console.log("post/put..", user_weights_id, user_weights)
-
-  let filter = { code: user_weights_id };
-  let update = { model_weights: user_weights };
-  let doc = Weights.findOneAndUpdate(
-    filter,
-    { $set: update },
-    { new: true, upsert: true }
-  );
-  console.log(Weights.schema);
-
-  //console.log("doc", doc)
-});
-
 router.get("/all-records", (req, res) => {
-  Weights.find()
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => console.log(err));
+  Weights.distinct("_id", function (error, ids) {
+    // ids is an array of all ObjectIds
+    res.send(ids);
+  });
 });
+
+
+
+router.post('/update/:uuid', (req,res) => {
+  let uuid = req.params.uuid;
+
+    Weights.findByIdAndUpdate({_id:`${uuid}`},{model_weights: "Great Dane"},{new: true, useFindAndModify: false}, function(err, result){
+        if(err){
+            res.send(err)
+        }
+        else{
+            res.send(result)
+            console.log(`${uuid}`)
+        }
+    })
+})
+
 
 router.get("/single-record/:uuid", (req, res) => {
   //600dd15c316b6008f4e31dbf

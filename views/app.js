@@ -1,11 +1,10 @@
-if (window.location.origin == "https://webcam-ml.uc.r.appspot.com"){
-  var base_url = "https://webcam-ml.uc.r.appspot.com"
-  console.log(base_url)
-} else{
-  var base_url =  "http://localhost:8080"
-  console.log(base_url)
+if (window.location.origin == "https://webcam-ml.uc.r.appspot.com") {
+  var base_url = "https://webcam-ml.uc.r.appspot.com";
+  console.log(base_url);
+} else {
+  var base_url = "http://localhost:8080";
+  console.log(base_url);
 }
-
 
 //profiles.js mongo db save
 async function saveToDatabase(model) {
@@ -18,8 +17,6 @@ async function saveToDatabase(model) {
     datasetObject[key] = Array.from(data);
   });
   let jsonModel = JSON.stringify(datasetObject);
-  
-  
 
   axios
     .post(`${base_url}/profiles/add-record`, {
@@ -38,7 +35,6 @@ async function saveToDatabase(model) {
   console.log("Weights sent to DB...");
 }
 
-
 async function loadFromDatabase(db_uuid, classifierModel) {
   //test id: 60159f08deec565ee8da4ef2
   console.log(
@@ -53,9 +49,8 @@ async function loadFromDatabase(db_uuid, classifierModel) {
     console.log("Uploading");
     console.log("Received json", db_json.model_weights);
     var db_json_parsed = JSON.parse(db_json);
-    
+
     var tensorObj = JSON.parse(db_json_parsed.data.model_weights);
-    
 
     Object.keys(tensorObj).forEach((key) => {
       tensorObj[key] = tf.tensor(tensorObj[key], [
@@ -82,10 +77,6 @@ async function imageClassificationWithWebcam() {
     const img = await webcam.capture();
     const result = await net.classify(img);
 
-    // document.getElementById("console-text-output").innerHTML = `
-    //     prediction: ${result[0].className}\n
-    //     probability: ${result[0].probability}
-    //   `;
     // Dispose the tensor to release the memory.
     img.dispose();
 
@@ -95,7 +86,14 @@ async function imageClassificationWithWebcam() {
   }
 }
 
+
+
+
+
 const start = async () => {
+
+
+
   const createKNNClassifier = async () => {
     console.log("Loading KNN Classifier");
     return await knnClassifier.create();
@@ -107,8 +105,7 @@ const start = async () => {
   const createWebcamInput = async () => {
     console.log("Loading Webcam Input");
     const webcamElement = await document.getElementById("webcam");
-    return await tf.data.webcam(webcamElement, {facingMode: 'environment'});
-   
+    return await tf.data.webcam(webcamElement, { facingMode: 'environment' });
   };
 
   const mobilenetModel = await createMobileNetModel();
@@ -130,6 +127,7 @@ const start = async () => {
       //Trigger DB Call
       loadFromDatabase(db_uuid, classifierModel);
     }
+
 
     document
       .getElementById("load_button")
@@ -165,6 +163,8 @@ const start = async () => {
     document
       .getElementById("class-label")
       .addEventListener("submit", addCustomClass);
+
+      
   };
 
   const saveClassifier = async (classifierModel) => {
@@ -196,7 +196,6 @@ const start = async () => {
       fr.onload = async () => {
         var dataset = fr.result;
         var tensorObj = JSON.parse(dataset);
-        
 
         Object.keys(tensorObj).forEach((key) => {
           tensorObj[key] = tf.tensor(tensorObj[key], [
@@ -204,7 +203,7 @@ const start = async () => {
             1024,
           ]);
         });
-        
+
         classifierModel.setClassifierDataset(tensorObj);
         console.log("Classifier has been set up! Congrats! ");
       };
@@ -223,15 +222,10 @@ const start = async () => {
     saveToDatabase(knnClassifierModel);
   };
 
-  const updateModel = async (db_uuid, classifierModel) => {
-    console.log("In downloadModel...");
-    saveClassifier(db_uuid, knnClassifierModel);
-  };
-
   const addDatasetClass = async (classId) => {
     console.log("Added class: ", classId);
     classes.push(classId);
-   
+
     // Capture an image from the web camera.
     const img = await webcamInput.capture();
 
