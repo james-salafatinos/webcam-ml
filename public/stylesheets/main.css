@@ -79,24 +79,26 @@
     justify-content: center;
     margin-right: 4rem;
     width: 900px;
+    
   }
   
   
   .element-mini {
     align-items: center;
     vertical-align:middle;
-    border-radius: 50px;
+    border-radius: 10px;
     display: inline-flex;
     color: black;
-    height: 20px;
+    height: 70px;
     margin-top:15px;
     justify-content: center;
+    font-size: 28px;
 
     box-shadow: 
     12px 12px 16px 0 rgba(0, 0, 0, 0.25),
     -8px -8px 12px 0 rgba(255, 255, 255, 0.3);
 
-    width: 300px;
+    width: 400px;
   }
 
   .event-text {
@@ -105,11 +107,6 @@
     font-family: sans-serif;
     font-weight: 400;
   }
-  
-  
-  
-  
-  
   
   
   
@@ -175,8 +172,8 @@
 
   .property-card-video
   {
-    height:336px;
-    width:336px;
+    height:500px;
+    width:700px;
     display:-webkit-box;
     display:-ms-flexbox;
     display:inline-flex;
@@ -199,16 +196,16 @@
   }
   .property-card-wide
   {
-    height:6em;
+    height:20em;
     width:50em;
     display:-webkit-box;
     display:-ms-flexbox;
     display:inline-flex;
     background-color: rgba(255, 255, 255, 0.835);
-    -webkit-box-orient:horizontal;
+    -webkit-box-orient:vertical;
     -webkit-box-direction:normal;
-    -ms-flex-direction:row;
-    flex-direction:row;
+    -ms-flex-direction:column;
+    flex-direction:column;
     position:relative;
     -webkit-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
     -o-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);

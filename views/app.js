@@ -1,5 +1,5 @@
-if (window.location.origin == "https://webcam-ml.uc.r.appspot.com") {
-  var base_url = "https://webcam-ml.uc.r.appspot.com";
+if (window.location.origin == "https://webcam-ml-304019.uc.r.appspot.com") {
+  var base_url = "https://webcam-ml-304019.uc.r.appspot.com";
   console.log(base_url);
 } else {
   var base_url = "http://localhost:8080";
@@ -151,15 +151,15 @@ const start = async () => {
         getCodeNameAndTriggerDBRetrieve(knnClassifierModel)
       );
 
-    document
-      .getElementById("class-a")
-      .addEventListener("click", () => addDatasetClass(0));
-    document
-      .getElementById("class-b")
-      .addEventListener("click", () => addDatasetClass(1));
-    document
-      .getElementById("class-c")
-      .addEventListener("click", () => addDatasetClass(2));
+    // document
+    //   .getElementById("class-a")
+    //   .addEventListener("click", () => addDatasetClass(0));
+    // document
+    //   .getElementById("class-b")
+    //   .addEventListener("click", () => addDatasetClass(1));
+    // document
+    //   .getElementById("class-c")
+    //   .addEventListener("click", () => addDatasetClass(2));
     document
       .getElementById("class-label")
       .addEventListener("submit", addCustomClass);

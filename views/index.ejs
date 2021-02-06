@@ -21,7 +21,7 @@
   <body>
     <div class="jumbotron text-center lang-logo">
       <div class="property-card" id="console">
-        <h3 id = "console-text-output">Results will be displayed here...</h3>
+        <h3 id = "console-text-output">Results</h3>
       </div>
       
       <div class="container">
@@ -32,29 +32,33 @@
           playsinline
           muted
           id="webcam"
-          width="336"
-          height="336"
+          width="700"
+          height="500"
           class="property-card-video"
         ></video>
         
-        <h3 class = 'property-card-wide-header'>Learning </h3>
         <br>
         <br>
         <div style="display: inline-flex" class='property-card-wide'>
           
           <form onsubmit="return false" id="class-label">
-            <label style="color: black" for="class-label">Class Label</label
+            <label style="color: black; font-size: 28px;" for="class-label">Label</label
             ><br />
             <input
               id="input-label"
-              class="element-mini"
+              class="element-mini btn btn-lg "
               type="text"
               name="class-label"
+              value="I see a stunnah..."
             /><br />
+            <br>
+            <button class="btn btn-lg btn-default" id="submit-label">Submit</button>
+            <br />
+            
           </form>
-          <button class="btn btn-lg btn-default" id="class-a">Add A</button>
+          <!-- <button class="btn btn-lg btn-default" id="class-a">Add A</button>
           <button class="btn btn-lg btn-default" id="class-b">Add B</button>
-          <button class="btn btn-lg btn-default" id="class-c">Add C</button>
+          <button class="btn btn-lg btn-default" id="class-c">Add C</button> -->
         </div>
 
       </div>
@@ -87,7 +91,7 @@
           <form onsubmit="return false" id="load-weights">
             <input
               id="uuid-for-db"
-              class="element-mini center-block"
+              class="element-mini center-block btn btn-lg"
               type="text"
               name="uuid-for-db"
             />
