@@ -151,9 +151,9 @@ const start = async () => {
         getCodeNameAndTriggerDBRetrieve(knnClassifierModel)
       );
 
-    // document
-    //   .getElementById("class-a")
-    //   .addEventListener("click", () => addDatasetClass(0));
+    document
+      .getElementById("submit-label")
+      .addEventListener("click", () => addCustomClass);
     // document
     //   .getElementById("class-b")
     //   .addEventListener("click", () => addDatasetClass(1));

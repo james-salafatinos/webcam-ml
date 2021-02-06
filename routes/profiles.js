@@ -3,11 +3,11 @@ const express = require("express");
 var router = express.Router();
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json({ limit: "10mb" }));
+const dotenv = require('dotenv');
 
 const Weights = require("../models/weights.model");
 const mongoose = require("mongoose");
-const dbURI =
-  "mongodb+srv://james:mountaindew@cluster0.10vne.mongodb.net/webcamML?retryWrites=true&w=majority";
+const dbURI = process.env.DB_URI;
 mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => console.log("Connected to db"))
