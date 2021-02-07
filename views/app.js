@@ -1,3 +1,6 @@
+
+//@help
+//Checks the client side origin and sets the "Base URL" for axios API calls
 if (window.location.origin == "https://webcam-ml-304019.uc.r.appspot.com") {
   var base_url = "https://webcam-ml-304019.uc.r.appspot.com";
   console.log(base_url);
@@ -6,7 +9,15 @@ if (window.location.origin == "https://webcam-ml-304019.uc.r.appspot.com") {
   console.log(base_url);
 }
 
-//profiles.js mongo db save
+//@help
+//Sets up webcam options for facing
+var webcamUserFacing = false
+var webcamOptions = { facingMode: 'user' }
+
+
+//@help
+//Consolidates weights to JSON
+//Makes a call to to the serverside API to add to database
 async function saveToDatabase(model) {
   //Prepare Dataset for storage
   console.log("In saveToDatabase()... passing to post /profiles/add-record");
@@ -23,13 +34,10 @@ async function saveToDatabase(model) {
       model_weights: jsonModel,
     })
     .then((result) => {
-      // console.log(`axios post: Add-Record Returned`, JSON.stringify(result));
       console.log(`axios post: Add-Record Returned`);
       document.getElementById(
         "inserted-db-id"
       ).innerText = `${result.data._id}`;
-      //Use window.location switch instead if you want to return json via a get req of the inserted ID
-      //window.location.href=`/profiles/single-record/${result.data._id}`
     });
 
   console.log("Weights sent to DB...");
@@ -72,7 +80,7 @@ async function imageClassificationWithWebcam() {
 
   // Create an object from Tensorflow.js data API which could capture image
   // from the web camera as Tensor.
-  const webcam = await tf.data.webcam(webcamElement);
+  const webcam = await tf.data.webcam(webcamElement, webcamOptions);
   while (true) {
     const img = await webcam.capture();
     const result = await net.classify(img);
@@ -86,14 +94,22 @@ async function imageClassificationWithWebcam() {
   }
 }
 
+async function switchCameras(){
+  console.log('Switch Cameras', webcamOptions)
 
+  if (webcamUserFacing){
+    webcamOptions = { facingMode: 'user' }
+  } else{
+    webcamOptions = { facingMode: 'environment' }
+  }
+  webcamUserFacing = !webcamUserFacing
 
+  start()
+
+}
 
 
 const start = async () => {
-
-
-
   const createKNNClassifier = async () => {
     console.log("Loading KNN Classifier");
     return await knnClassifier.create();
@@ -105,7 +121,7 @@ const start = async () => {
   const createWebcamInput = async () => {
     console.log("Loading Webcam Input");
     const webcamElement = await document.getElementById("webcam");
-    return await tf.data.webcam(webcamElement, { facingMode: 'environment' });
+    return await tf.data.webcam(webcamElement, webcamOptions);
   };
 
   const mobilenetModel = await createMobileNetModel();
@@ -113,6 +129,7 @@ const start = async () => {
   const webcamInput = await createWebcamInput();
 
   const initializeElements = () => {
+
     function addCustomClass(event) {
       let class_label = document.getElementById("input-label").value;
 
@@ -127,6 +144,7 @@ const start = async () => {
       //Trigger DB Call
       loadFromDatabase(db_uuid, classifierModel);
     }
+
 
 
     document
@@ -154,12 +172,9 @@ const start = async () => {
     document
       .getElementById("submit-label")
       .addEventListener("click", () => addCustomClass);
-    // document
-    //   .getElementById("class-b")
-    //   .addEventListener("click", () => addDatasetClass(1));
-    // document
-    //   .getElementById("class-c")
-    //   .addEventListener("click", () => addDatasetClass(2));
+    document
+      .getElementById("switch-camera")
+      .addEventListener("click", () => switchCameras());
     document
       .getElementById("class-label")
       .addEventListener("submit", addCustomClass);
@@ -241,7 +256,7 @@ const start = async () => {
   };
 
   //define global class function
-  var classes = ["A", "B", "C", "D"];
+  var classes = [];
 
   const imageClassificationWithTransferLearningOnWebcam = async () => {
     console.log("Machine Learning on the web is ready");
