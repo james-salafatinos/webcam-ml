@@ -12,7 +12,7 @@ if (window.location.origin == "https://webcam-ml-304019.uc.r.appspot.com") {
 //@help
 //Sets up webcam options for facing
 var webcamUserFacing = false
-var webcamOptions = { facingMode: 'user' }
+var webcamOptions = {facingMode: 'environment'}
 
 
 //@help
@@ -71,28 +71,28 @@ async function loadFromDatabase(db_uuid, classifierModel) {
   };
 }
 
-async function imageClassificationWithWebcam() {
-  console.log("Loading mobilenet..");
+// async function imageClassificationWithWebcam() {
+//   console.log("Loading mobilenet..");
 
-  // Load the model from tensorflow.js
-  net = await mobilenet.load();
-  console.log("Successfully loaded model");
+//   // Load the model from tensorflow.js
+//   net = await mobilenet.load();
+//   console.log("Successfully loaded model");
 
-  // Create an object from Tensorflow.js data API which could capture image
-  // from the web camera as Tensor.
-  const webcam = await tf.data.webcam(webcamElement, webcamOptions);
-  while (true) {
-    const img = await webcam.capture();
-    const result = await net.classify(img);
+//   // Create an object from Tensorflow.js data API which could capture image
+//   // from the web camera as Tensor.
+//   const webcam = await tf.data.webcam(webcamElement, webcamOptions);
+//   while (true) {
+//     const img = await webcam.capture();
+//     const result = await net.classify(img);
 
-    // Dispose the tensor to release the memory.
-    img.dispose();
+//     // Dispose the tensor to release the memory.
+//     img.dispose();
 
-    // Give some breathing room by waiting for the next animation frame to
-    // fire.
-    await tf.nextFrame();
-  }
-}
+//     // Give some breathing room by waiting for the next animation frame to
+//     // fire.
+//     await tf.nextFrame();
+//   }
+// }
 
 async function switchCameras(){
   console.log('Switch Cameras', webcamOptions)
@@ -103,9 +103,6 @@ async function switchCameras(){
     webcamOptions = { facingMode: 'environment' }
   }
   webcamUserFacing = !webcamUserFacing
-
-  start()
-
 }
 
 
