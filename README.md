@@ -1,40 +1,36 @@
 # webcam-ml
 Real-time image classification using your webcam with tensorflow.js
 
-Getting Started
+- Train your own real-time image classifier on-the-fly
+- Save trained model to the cloud (no login required!)
+- Load previously trained model from the cloud (no login required!)
 
+## Usage
+1. Focus on an object or entity with your webcam
+2. Enter label describing what the webcam is viewing
+3. Submit several example captures (ideally with different object angles)
+4. Observe the model's classification in real time 
+5. Repeat to build your own personally trained image classifer
+6. Save the model for later! Or send the code to your friends for them to load your model!
 
-ToDos:
-1. Add loading gif for when webcam is initializing and model is downloading
+## About
+Hosted with GCP at: https://webcam-ml-304019.uc.r.appspot.com/
 
-Notes:
+## Installation for local development
+1. Run `git clone https://github.com/james-salafatinos/webcam-ml.git` in your desired directory
+2. Run `npm install -i` to install the dependencies
+3. Run `npm start` to initiate the server listening at `http://localhost:8080/`
 
-Ideas:
-1. Enable free text classes to easily label the examples I'm capturing
-   1. User types and then can repeatedly capture different angles with the same "Capture" button
-2. If I could connect the webcam to other video capture devices (i.e. my phone)
-3. To easily "sign in" with a code to update an online stored model
-   1. So that any time I go to the site, I can enter my code and the app will download the cloud storage model associated with that code. Then you may use the app to update it, and then save your progress. When saved the app will update the model weights in the cloud associated with that code and close. No authentication or sign in required.
-4. Ability view, and download class labels associated with the "sign in" code. So that I can see all the classes I've "Tagged" throughout my time using the app.
+## Installation for Google Cloud deployment
+1. Run `git clone https://github.com/james-salafatinos/webcam-ml.git` in your cloud shell
+2. Run `npm install -i` to install the dependencies
+3. Run `gcloud app deploy` and wait a few minutes to spin up the active server in the cloud
 
+## To-dos:
+1. `[Feature]` - Add loading gif for when webcam is initializing and model is downloading
+2. `[Bug]` - Fix unsupported Safari "getUserMedia()"
 
-Challenges:
-1. CI/CD
-2. GAE always listens to port 8080, you cannot configure it differently.
-
-
-Deploy to Google App Engine
-1. Create an Google App Engine app from the GCP console dashboard
-2. Enter cloud shell from online GCP dashboard
-3. clone github repository
-4. Run "export PORT=3000 && npm install"
-   1. This will set the port and install the dependencies to set up the env
-5. Run "npm start"
-   1. This will start the server and host the application
-6. Now app can be web previewed (may have to change the default viewing port)
-
-
-Resources
+## Tool Landscape
 1. Testing Framework
    1. Mocha
 2. App Deployment
@@ -51,22 +47,3 @@ Resources
    1. Github Actions
 8. Database 
    1. MongoDB
-
-
-
-
-Google Cloud SDK commands:
-1. gcloud auth login
-   1. Allows you to login through web and swap credentials
-2. gcloud config set project "..."
-   1. Sets the SDK pointing to a project
-3. gcloud app browse
-   1. Launches the web preview
-4. gcloud iam service-accounts keys create secret.json \
-       --iam-account PROJECT_ID@appspot.gserviceaccount.com
-  1. This allows you to create a credentials json to enable github actions (CI/CD) to deploy
-
-
-Resources:
-1. Google Cloud Build guide to connect with github repo:
-2. 
