@@ -8,9 +8,9 @@ Train your own real-time image classifier on-the-fly. Real-time image classifica
 2. Authentiaction-less model save! Who wants to create an account? Not me... just copy the UUID and save it somewhere!
 3. Authentiaction-less model load! Send the UUID of your trained model to your friends and have them load it! Great for memes.
 
+## Demo of App
+
 ![](assets/gif1.gif)
-![](assets/gif2.gif)
-![](assets/gif3.gif)
 
 ## Usage
 
@@ -60,3 +60,11 @@ Hosted with GCP at: https://webcam-ml-304019.uc.r.appspot.com/
    1. Github Actions
 8. Database
    1. MongoDB
+
+## Demo of Saving
+
+![](assets/gif2.gif)
+
+## Demo of Loading
+
+![](assets/gif3.gif)
