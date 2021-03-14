@@ -5,11 +5,12 @@ Train your own real-time image classifier on-the-fly. Real-time image classifica
 ## Features
 
 1. Custom label driven real-time image classification. Learn what anything looks like, and call it what it is! Wide range of applications from medical to meme.
-   ![](assets/gif1.gif)
 2. Authentiaction-less model save! Who wants to create an account? Not me... just copy the UUID and save it somewhere!
-   ![](assets/gif2.gif)
 3. Authentiaction-less model load! Send the UUID of your trained model to your friends and have them load it! Great for memes.
-   ![](assets/gif3.gif)
+
+![](assets/gif1.gif)
+![](assets/gif2.gif)
+![](assets/gif3.gif)
 
 ## Usage
 
