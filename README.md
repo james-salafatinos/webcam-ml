@@ -21,9 +21,6 @@ Train your own real-time image classifier on-the-fly. Real-time image classifica
 5. Repeat to build your own personally trained image classifer
 6. Save the model for later! Or send the code to your friends for them to load your model!
 
-## About
-
-Hosted with GCP at: https://webcam-ml-304019.uc.r.appspot.com/
 
 ## Installation for local development
 
